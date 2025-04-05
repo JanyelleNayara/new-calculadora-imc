@@ -17,8 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function calcularImc() {
-		let altura = parseFloat(document.getElementById('altura').value);
-		let peso = parseFloat(document.getElementById('peso').value);
+		let alturaInput = document.getElementById('altura');
+		let pesoInput = document.getElementById('peso');
+		let peso = parseFloat(pesoInput.value);
+		let altura = parseInt(alturaInput.value);
 
 		if (!altura || altura <= 0 || !Number.isInteger(altura)) {
 			msgNotificacao('Digite uma altura válida!');
@@ -29,8 +31,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 
-		let alturaMetro = altura / 100;
-		let imc = (peso / (alturaMetro * alturaMetro)).toFixed(2);
+		let imc = (peso / (altura * altura)).toFixed(2);
+
+
+		alturaInput.value = '';
+		pesoInput.value = '';
 
 		classificaImc(imc);
 	}
